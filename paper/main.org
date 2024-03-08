@@ -1,0 +1,25 @@
+#+OPTIONS: <:nil c:nil todo:nil toc:nil tags:nil broken-links:t
+
+* LaTeX Configuration :noexport:
+#+macro: percentimprove src_calc[:results raw]{round(100 * ($2 - $1)/($2), 1)}%
+#+macro: pythonval src_python[:session :results raw]{$1}
+#+LATEX_CLASS_OPTIONS: [11pt]
+
+#+begin_src python :session :results none :exports none
+import pickle
+with open("../results/processed_results_data.pickle", 'rb') as handle:
+    d = pickle.load(handle)
+#+end_src
+
+* Introduction
+This document shows how it is possible to compute values inline using the automatic export features from Emacs' Org Mode. For example, this macro computes the percent reduction in cost from 105 to 100:  ={{{percentimprove(100,105)}}}= becomes {{{percentimprove(100,105)}}}
+
+* Session
+
+Number of Seeds: {{{pythonval(d['num_seeds'])}}}
+
+Mean Squared Error for Least Squares: {{{pythonval(f"{d['mse_lstsq']:0.2f}")}}}
+
+Mean Squared Error for RANSAC: {{{pythonval(f"{d['mse_ransac']:0.2f}")}}}
+
+For our experiments, we have shown that RANSAC yields a relative improvement of {{{pythonval(f"{100*(d['mse_lstsq'] - d['mse_ransac'])/d['mse_lstsq']:0.1f}")}}}%.
