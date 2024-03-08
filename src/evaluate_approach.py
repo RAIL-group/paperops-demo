@@ -80,10 +80,10 @@ def plot_result(ax, xs, ys, xs_eval, ys_eval, b, m):
     ax.set_xlim(xl)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--seed", type=int)
-    parser.add_argument("--approach", choices=('lstsq', 'ransac'))
+    parser.add_argument("--approach", choices=("lstsq", "ransac"))
     parser.add_argument("--savedir", default="/results/")
     args = parser.parse_args()
     np.random.seed(args.seed)
@@ -92,9 +92,11 @@ if __name__ == '__main__':
     m = 2 * np.random.rand() - 1
     b = 8 * np.random.rand() - 4
     xs_train, ys_train = get_signal_with_outliers(
-        num_inliers=30, num_outliers=15, m=m, b=b)
+        num_inliers=30, num_outliers=15, m=m, b=b
+    )
     xs_eval, ys_eval = get_signal_with_outliers(
-        num_inliers=20, num_outliers=0, m=m, b=b)
+        num_inliers=20, num_outliers=0, m=m, b=b
+    )
 
     # Evaluate
     if args.approach == "lstsq":
