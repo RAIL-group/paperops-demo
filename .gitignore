@@ -1,2 +1,8 @@
 *.DS_Store
 /results/*
+
+paper/*.pdf
+paper/*.tex
+paper/*.tex~
+
+paper/figures/scatterplot.png
