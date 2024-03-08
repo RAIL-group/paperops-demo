@@ -36,7 +36,7 @@ results/results_%.csv:
 		--seed $(seed) --approach $(approach)
 
 # Processed Results
-results-files = results/processed_scatterplot.png results/processed_results_data.pickle
+processed-results-files = results/processed_scatterplot.png results/processed_results_data.pickle
 results/processed_scatterplot.png: $(eval-lstsq-seeds) $(eval-ransac-seeds)
 	@echo "Generating the results scatterplot."
 	@$(DOCKER_BASE) python3 /src/process_results.py --output scatterplot
@@ -47,10 +47,10 @@ results/processed_results_data.pickle: $(eval-lstsq-seeds) $(eval-ransac-seeds)
 # Figures
 rastered-figures = paper/figures/scatterplot.png
 paper/figures/scatterplot.png: paper/figures/scatterplot.svg results/processed_scatterplot.png
-	@$(DOCKER_BASE) inkscape --export-type=png --export-dpi=300 figures/scatterplot.svg
+	@$(DOCKER_BASE) inkscape --export-type=png --export-dpi=600 figures/scatterplot.svg
 
 # Compile the paper
-paper/main.pdf: paper/main.org $(results-files) $(rastered-figures)
+paper/main.pdf: paper/main.org $(processed-results-files) $(rastered-figures)
 	@echo "Exporting and compiling the paper."
 	@$(DOCKER_BASE) emacs main.org --eval "(progn \
 		(setq org-babel-python-command \"python3\") \
@@ -62,6 +62,16 @@ paper/main.pdf: paper/main.org $(results-files) $(rastered-figures)
 
 # Short commands for ease of use
 evaluate: $(eval-lstsq-seeds) $(eval-ransac-seeds)
-process-results: $(results-files)
+process-results: $(processed-results-files)
 raster-figures: $(rastered-figures)
 compile-paper: paper/main.pdf
+clean:
+	@echo "Removing built results."
+	@rm -f $(processed-results-files) $(rastered-figures) paper/main.pdf paper/*.tex paper/*.tex~
+
+clean-all: clean
+	@echo "Cleaning all generated outputs (including results)."
+	@echo -n "Are you sure? [y/N] " && read ans && [ $${ans:-N} = y ]
+	@$(MAKE) clean
+	@rm -rf results/
+	@echo "...done cleaning."
