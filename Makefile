@@ -37,7 +37,7 @@ results/results_%.csv:
 
 # Processed Results
 processed-results-files = results/processed_scatterplot.png results/processed_results_data.pickle
-results/processed_scatterplot.png: $(eval-lstsq-seeds) $(eval-ransac-seeds)
+results/processed_scatterplot.png: src/process_results.py $(eval-lstsq-seeds) $(eval-ransac-seeds)
 	@echo "Generating the results scatterplot."
 	@$(DOCKER_BASE) python3 /src/process_results.py --output scatterplot
 results/processed_results_data.pickle: $(eval-lstsq-seeds) $(eval-ransac-seeds)
@@ -61,10 +61,13 @@ paper/main.pdf: paper/main.org $(processed-results-files) $(rastered-figures)
 		(save-buffers-kill-terminal))"
 
 # Short commands for ease of use
+.PHONY: evaluate process-results raster-figures paper
 evaluate: $(eval-lstsq-seeds) $(eval-ransac-seeds)
 process-results: $(processed-results-files)
 raster-figures: $(rastered-figures)
-compile-paper: paper/main.pdf
+paper: paper/main.pdf
+
+.PHONY: clean clean-all
 clean:
 	@echo "Removing built results."
 	@rm -f $(processed-results-files) $(rastered-figures) paper/main.pdf paper/*.tex paper/*.tex~
