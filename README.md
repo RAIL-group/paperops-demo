@@ -13,6 +13,6 @@ The resulting PDF resembles the following:
 
 The following schematic of the dependency structure of the Makefile and so an overview of the outputs generated automatically to build the PDF of the paper:
 
-![Schematic of the Make target dependencies.](./images/2024-paperops-schematic.png?raw=true "Schematic of the Make target dependencies.")
+<img src="./images/2024-paperops-schematic.png" width="400" alt="Schematic of the Make target dependencies." />
 
 See our [blog post](https://cs.gmu.edu/~gjstein/2024/5/paperops-demo/) for more details on how it works.
