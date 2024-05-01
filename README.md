@@ -8,11 +8,16 @@ Running this command runs 800 simple "experiments" and includes the resulting sc
 make paper NUM_EXPERIMENTS=800 -j20
 ```
 The resulting PDF resembles the following:
-![Making a paper with 800 example experiments and their results.](./images/2024-paperops-example-800-exp.png?raw=true "Making a paper with 800 example experiments and their results." | width=400)
+
+<p align="center">
+<img src="./images/2024-paperops-example-800-exp.png" width="600" alt="Making a paper with 800 example experiments and their results." />
+</p>
 
 
 The following schematic of the dependency structure of the Makefile and so an overview of the outputs generated automatically to build the PDF of the paper:
 
-<img src="./images/2024-paperops-schematic.png" width="400" alt="Schematic of the Make target dependencies." />
+<p align="center">
+<img src="./images/2024-paperops-schematic.png" width="600" alt="Schematic of the Make target dependencies." />
+</p>
 
 See our [blog post](https://cs.gmu.edu/~gjstein/2024/5/paperops-demo/) for more details on how it works.
