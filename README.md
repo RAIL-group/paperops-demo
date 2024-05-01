@@ -8,7 +8,7 @@ Running this command runs 800 simple "experiments" and includes the resulting sc
 make paper NUM_EXPERIMENTS=800 -j20
 ```
 The resulting PDF resembles the following:
-![Making a paper with 800 example experiments and their results.](./images/2024-paperops-example-800-exp.png?raw=true "Making a paper with 800 example experiments and their results.")
+![Making a paper with 800 example experiments and their results.](./images/2024-paperops-example-800-exp.png?raw=true "Making a paper with 800 example experiments and their results." | width=400)
 
 
 The following schematic of the dependency structure of the Makefile and so an overview of the outputs generated automatically to build the PDF of the paper:
