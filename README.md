@@ -1,5 +1,6 @@
 
-### PaperOps: run experiments and add results to a PDF with a single Make command
+# PaperOps Demo
+### Run experiments and add results to a PDF with a single Make command
 
 The goal of this project is to demonstrate a simple proof-of-concept in which *every aspect* of running results to including them in a paper is automated. Simply download the repo from GitHub, run `make paper`, and it outputs a PDF file with the results from some simple experiments.
 
