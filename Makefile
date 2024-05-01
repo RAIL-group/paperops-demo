@@ -5,7 +5,7 @@ VERSION = $(MAJOR).$(MINOR)
 IMAGE_NAME ?= paperops-demo
 
 # Free parameters
-NUM_SEEDS ?= 50
+NUM_EXPERIMENTS ?= 50
 
 # Variables for Docker + building
 .PHONY: build
@@ -22,10 +22,10 @@ build:
 
 # Specify what results we want and targets for evaluation
 eval-lstsq-seeds = \
-	$(shell for ii in $$(seq 10000 $$((10000 + $(NUM_SEEDS) - 1))); \
+	$(shell for ii in $$(seq 10000 $$((10000 + $(NUM_EXPERIMENTS) - 1))); \
 		do echo "results/results_lstsq_$${ii}.csv"; done)
 eval-ransac-seeds = \
-	$(shell for ii in $$(seq 10000 $$((10000 + $(NUM_SEEDS) - 1))); \
+	$(shell for ii in $$(seq 10000 $$((10000 + $(NUM_EXPERIMENTS) - 1))); \
 		do echo "results/results_ransac_$${ii}.csv"; done)
 results/results_%.csv: seed = $(shell echo $@ | grep -Eo '[0-9]+' | tail -1)
 results/results_%.csv: approach = $(shell echo $@ | grep -Eo '(lstsq|ransac)' | tail -1)
